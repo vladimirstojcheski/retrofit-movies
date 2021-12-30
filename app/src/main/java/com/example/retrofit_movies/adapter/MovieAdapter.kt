@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide
 import com.example.retrofit_movies.R
 import com.example.retrofit_movies.model.Movie
 
-class MovieAdapter (var allMovies: MutableList<Movie>) : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
+class MovieAdapter (var allMovies: MutableList<Movie>, private val itemClickListener: OnItemClickListener) : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
@@ -37,6 +37,10 @@ class MovieAdapter (var allMovies: MutableList<Movie>) : RecyclerView.Adapter<Mo
         holder.movieTitle.text = currentMovie.title
         holder.movieYear.text = currentMovie.year
         Glide.with(holder.itemView).load(currentMovie.poster).into(holder.moviePicture)
+
+        holder.itemView.setOnClickListener{
+            itemClickListener.onItemClickListener(currentMovie)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -47,4 +51,8 @@ class MovieAdapter (var allMovies: MutableList<Movie>) : RecyclerView.Adapter<Mo
         this.allMovies.add(movie)
         this.notifyDataSetChanged()
     }
+}
+
+interface OnItemClickListener{
+    fun onItemClickListener(movie: Movie)
 }

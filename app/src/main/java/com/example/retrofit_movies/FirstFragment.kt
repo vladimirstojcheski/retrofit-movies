@@ -8,15 +8,18 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.Toast
+import androidx.fragment.app.FragmentManager
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.retrofit_movies.adapter.MovieAdapter
+import com.example.retrofit_movies.adapter.OnItemClickListener
 import com.example.retrofit_movies.api.OmdbApi
 import com.example.retrofit_movies.api.OmdbApiClient
 import com.example.retrofit_movies.database.AppDatabase
 import com.example.retrofit_movies.databinding.FragmentFirstBinding
 import com.example.retrofit_movies.model.Movie
+import com.example.retrofit_movies.viewmodel.SecondFragmentViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -27,7 +30,7 @@ import retrofit2.Response
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
-class FirstFragment : Fragment() {
+class FirstFragment : Fragment(), OnItemClickListener{
 
     private var _binding: FragmentFirstBinding? = null
 
@@ -60,7 +63,7 @@ class FirstFragment : Fragment() {
 
         movieRecyclerView.layoutManager = LinearLayoutManager(activity)
 
-        recyclerViewAdapter = MovieAdapter(mutableListOf())
+        recyclerViewAdapter = MovieAdapter(mutableListOf(), this)
 
         movieRecyclerView.setHasFixedSize(true)
 
@@ -119,5 +122,11 @@ class FirstFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onItemClickListener(movie: Movie) {
+        val activity = activity as MainActivity
+        activity.setMovie(movie)
+        findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment, null)
     }
 }

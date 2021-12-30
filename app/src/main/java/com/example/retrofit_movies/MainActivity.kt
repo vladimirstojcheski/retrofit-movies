@@ -11,11 +11,13 @@ import android.view.Menu
 import android.view.MenuItem
 import com.example.retrofit_movies.database.AppDatabase
 import com.example.retrofit_movies.databinding.ActivityMainBinding
+import com.example.retrofit_movies.model.Movie
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+    private var selectedMovie: Movie? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,5 +58,15 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
+    }
+
+    fun setMovie(movie: Movie)
+    {
+        this.selectedMovie = movie
+    }
+
+    fun getMovie(): Movie?
+    {
+        return this.selectedMovie
     }
 }
