@@ -11,6 +11,6 @@ abstract class MovieDao {
 
     @Transaction
     @Query("SELECT * FROM Movie WHERE title = :title")
-    abstract fun getMovie(title: String): Movie
+    abstract fun getMovie(title: String): List<Movie>
 
 }

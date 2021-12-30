@@ -126,7 +126,7 @@ class FirstFragment : Fragment(), OnItemClickListener{
 
     override fun onItemClickListener(movie: Movie) {
         val activity = activity as MainActivity
-        activity.setMovie(movie)
+        activity.setMovieTitle(movie.title)
         findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment, null)
     }
 }

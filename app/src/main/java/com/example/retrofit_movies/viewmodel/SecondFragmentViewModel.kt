@@ -23,7 +23,7 @@ class SecondFragmentViewModel(application: Application): AndroidViewModel(applic
             val movieTmp = database.MovieDao().getMovie(movieTitle)
 
             withContext(Dispatchers.Main){
-                movie = movieTmp
+                movie = movieTmp[0]
             }
         }
     }

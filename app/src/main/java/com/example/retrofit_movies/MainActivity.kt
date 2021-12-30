@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
-    private var selectedMovie: Movie? = null
+    private var selectedMovieTitle: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,13 +60,13 @@ class MainActivity : AppCompatActivity() {
                 || super.onSupportNavigateUp()
     }
 
-    fun setMovie(movie: Movie)
+    fun setMovieTitle(title: String)
     {
-        this.selectedMovie = movie
+        this.selectedMovieTitle = title
     }
 
-    fun getMovie(): Movie?
+    fun getMovieTitle(): String
     {
-        return this.selectedMovie
+        return this.selectedMovieTitle
     }
 }
