@@ -51,19 +51,22 @@ class SecondFragment : Fragment() {
             selectedMovie = database.MovieDao().getMovie(selectedMovieTitle)[0]
         }
 
-        val txtTitle = view.findViewById<TextView>(R.id.txtViewTitleId)
-        val txtReleased = view.findViewById<TextView>(R.id.txtViewReleaseId)
-        val txtImdb = view.findViewById<TextView>(R.id.txtViewIMDBId)
-        val txtActors = view.findViewById<TextView>(R.id.txtViewActorsId)
-        val txtAwards = view.findViewById<TextView>(R.id.txtViewAwardsId)
-        val txtPlot = view.findViewById<TextView>(R.id.txtViewPlotId)
+        CoroutineScope(Dispatchers.Main).launch {
 
-        txtTitle.text = selectedMovie?.title
-        txtReleased.text = selectedMovie?.released
-        txtImdb.text = selectedMovie?.imdbRating
-        txtActors.text = selectedMovie?.actors
-        txtAwards.text = selectedMovie?.awards
-        txtPlot.text = selectedMovie?.plot
+            val txtTitle = view.findViewById<TextView>(R.id.txtViewTitleId)
+            val txtReleased = view.findViewById<TextView>(R.id.txtViewReleaseId)
+            val txtImdb = view.findViewById<TextView>(R.id.txtViewIMDBId)
+            val txtActors = view.findViewById<TextView>(R.id.txtViewActorsId)
+            val txtAwards = view.findViewById<TextView>(R.id.txtViewAwardsId)
+            val txtPlot = view.findViewById<TextView>(R.id.txtViewPlotId)
+
+            txtTitle.text = selectedMovie?.title
+            txtReleased.text = selectedMovie?.released
+            txtImdb.text = selectedMovie?.imdbRating
+            txtActors.text = selectedMovie?.actors
+            txtAwards.text = selectedMovie?.awards
+            txtPlot.text = selectedMovie?.plot
+        }
 
         binding.buttonSecond.setOnClickListener {
             findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
